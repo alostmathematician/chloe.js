@@ -7,7 +7,7 @@ export const CONTROLLER_FUNCTION = 'CONTROLLER_FUNCTION'
 export enum RestMethod {
     GET,
     POST,
-    UPDATE,
+    PUT,
     DELETE
 }
 
@@ -54,7 +54,7 @@ const restMethod = (method: RestMethod) =>
 
 export const Get = restMethod(RestMethod.GET)
 export const Post = restMethod(RestMethod.POST)
-export const Update = restMethod(RestMethod.UPDATE)
+export const Put = restMethod(RestMethod.PUT)
 export const Delete = restMethod(RestMethod.DELETE)
 
 const restParam = (method: RestParam) =>

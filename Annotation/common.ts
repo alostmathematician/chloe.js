@@ -8,9 +8,6 @@ export enum PropType {
     AUTOWIRED,
 }
 
-export enum FuncType {
-    REST
-}
 
 export interface PropMeta {
     method: PropType,

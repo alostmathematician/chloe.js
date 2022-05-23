@@ -1,5 +1,5 @@
 import {ClassType, defineClassType} from "./common";
 
-const Repository: ClassDecorator = (target) => {
+export const Repository: ClassDecorator = (target) => {
     defineClassType(ClassType.REPOSITORY, target)
 }

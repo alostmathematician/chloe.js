@@ -1,15 +1,14 @@
-type ConfigKeyType = string | symbol | number
+export type ConfigKeyType = string | symbol | number
 type DataBaseType = 'mysql' | 'mongo' | 'sqlserver' | 'postgres'
 
-type DataBaseOption = {
+export type DataBaseOption = {
     url: string | symbol,
     username?: string | symbol,
-    password?: string | symbol
+    password?: string | symbol,
+    database?: string | symbol
 }
 
 type DataBaseSection = Partial<Record<DataBaseType, DataBaseOption[]>>
-
-type EnvironmentType = 'development' | 'staging' | 'production'
 
 type ServerSection = {
     url: string | symbol,
@@ -30,14 +29,6 @@ type EnvironmentOption = {
     logger?: LoggerSection
 }
 
-type EnvironmentSection = Partial<Record<EnvironmentType, EnvironmentOption>>
-
-type ConfigOption = {
-    env?: EnvironmentSection
-}
-
 type CustomOption<T extends ConfigKeyType> = Record<T,any>
 
-export type ConfigSection<T extends ConfigKeyType> = Record<T,ConfigOption> | CustomOption<T>
-
-
+export type ConfigSection<T extends ConfigKeyType> = EnvironmentOption | CustomOption<T>

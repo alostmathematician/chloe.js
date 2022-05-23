@@ -20,7 +20,8 @@ export interface GenerationValue {
 
 export interface EntityPropMeta extends Omit<PropMeta, 'method'> {
     nullable: boolean,
-    length: number,
+    min: number,
+    max: number
     unique: boolean
 }
 
@@ -59,19 +60,21 @@ export const GenerateValue = (strategy?: GenerationType): PropertyDecorator =>
 
 export const Column = (
     name?: string | symbol,
-    length?: number,
+    min?: number,
+    max?: number,
     nullable?: boolean,
     unique?: boolean): PropertyDecorator =>
     (target, propertyKey) => {
     const entityProp: EntityPropMeta = {
         type: Reflect.getMetadata('design:type', target, propertyKey),
-        name: name ? name : propertyKey,
+        name: propertyKey,
         nullable: nullable ? nullable : true,
-        length: length ? length : Number.POSITIVE_INFINITY,
+        min: min || 0,
+        max: max || Number.MAX_SAFE_INTEGER,
         unique: unique ? unique : true
     }
     const entityProps: EntityProps = Reflect.getMetadata(ENTITY_PROPS, target) ||
         {}
-    entityProps[propertyKey] = entityProp
+    entityProps[name ? name : propertyKey] = entityProp
     Reflect.defineMetadata(ENTITY_PROPS, entityProps,target)
 }
